@@ -15,9 +15,14 @@ const app = express();
 const authRouter = require('./routes/auth');
 const mongoose = require('mongoose');
 
+// 
+require('dotenv').config();
+
 
 // db connection
-mongoose.connect('mongodb+srv://katsisaac50:LovE1234k@cluster0.nqjxtpf.mongodb.net/?retryWrites=true&w=majority', {
+const mongoURI = process.env.MONGO_URI;
+
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -28,7 +33,6 @@ mongoose.connect('mongodb+srv://katsisaac50:LovE1234k@cluster0.nqjxtpf.mongodb.n
 }).catch((err) => {
   console.log(err);
 });
-
 
 // middlewares
 app.use(cors());
@@ -45,7 +49,7 @@ app.use(express.static('public'));
 // routes middleware
 app.use('/api', authRouter);
 
-app.listen(4000, () => {
+app.listen(1400, () => {
   console.log('Server is running on port 5000');
 })
 
